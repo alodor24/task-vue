@@ -1,0 +1,65 @@
+<!Doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <title>Task App with Vue</title>
+    </head>
+    
+    <body>
+        <section class="container">
+            <h1 class="title">Task App with Vue</h1>
+            
+            <div id="app">
+                <!-- Form -->
+                <div class="container-form">
+                    <h2 class="form-title">Add a new Task</h2>
+                    
+                    <form @submit="addTask">
+                        <input class="form-input" type="text" v-model="tasks.title">
+                        <button class="btn-success" type="submit">Add</button>
+                    </form>
+                </div>
+                <!-- /Form -->
+                
+                <!-- Table -->
+                <div class="container-table">
+                    <table>
+                        <thead>
+                            <th style="width: 10%;">Check Done</th>
+                            <th style="width: 70%;">Name Task</th>
+                            <th style="width: 20%;">Action</th>
+                        </thead>                        
+                        <tbody>
+                            <tr v-for="task in tasks">
+                                <td>
+                                    <label class="container-checkbox">
+                                        <input class="input-checkbox" type="checkbox" v-model="task.done" @click="showDelete(task)">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <span :class="{taskDone: task.done}">
+                                        {{ task.title }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn-danger" :class="{showDelete: task.show}" @click="deleteTask(task)">
+                                            Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /Table -->
+            </div>   
+        </section>
+        
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="assets/js/methods.js"></script>
+        <!-- /Scripts -->
+    </body>
+</html>
